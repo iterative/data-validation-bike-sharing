@@ -9,14 +9,14 @@ from utils.load_params import load_params
 
 
 def train_data_drift_detector(data_dir: Path, detector_dir: Path,
-                              detector_fname: Path):
+                              detector_fname: Path, n_permutations: int):
     """Trains and saves covariate shift detector (=MMD drift detector)
 
     Args:
         data_dir: Folder with saved training data for the detector
         detector_dir: Folderpath where to save detector
         detector_fname: Filename of the saved detector
-
+        n_permutations: Number of permutations used in the permutation test.
     Returns:
 
     """
@@ -37,6 +37,7 @@ if __name__ == '__main__':
     data_dir = Path(params['base']['data_dir'])
     detector_dir = Path(params['detector']['dir'])
     detector_fname = Path(params['detector']['data_drift']['fname'])
+    n_permutations = params['detector']['data_drift']['n_permutations']
 
     train_data_drift_detector(data_dir=data_dir, detector_dir=detector_dir,
-                              detector_fname=detector_fname)
+                              detector_fname=detector_fname, n_permutations=n_permutations)

@@ -98,7 +98,7 @@ stages:
     - path: data/bike-sharing/y_test.pkl
       md5: f65b28a8defe61fcafae427418340550
       size: 23879
-    - path: models/covariate_shift_detector.joblib
+    - path: models/covariate_shift_detector
       md5: e2a9a231006bd0b949c24f4bed722936.dir
       size: 140130
       nfiles: 2
@@ -114,7 +114,8 @@ stages:
         detector:
           dir: models
           data_drift:
-            fname: covariate_shift_detector.joblib
+            fname: covariate_shift_detector
+            n_permutations: 20
         evaluation:
           metrics_dir: metrics
           plots_dir: plots
@@ -124,17 +125,17 @@ stages:
           n_estimators: 50
     outs:
     - path: metrics/data_drift.json
-      md5: b5b8060e045f6e5cfab6cd1281b8dc15
+      md5: 5a57279850a1b7829cd22f444a2bc02d
       size: 67
     - path: metrics/ml.json
       md5: c60776c1a7b90a5ed8efa9b79ef07b4d
       size: 87
     - path: plots/hum_feature_distribution.png
-      md5: 349aa899fb78b3f0da91ec4a6ed7782f
-      size: 43146
+      md5: da66738cf25ac14beb00ba7b5ac05d6a
+      size: 43188
     - path: plots/temp_feature_distribution.png
-      md5: 952ff81f20a717bbd82cd68575fc7d33
-      size: 48500
+      md5: b7d258ad9555460baa8716b783ca2a17
+      size: 48544
   prediction_detector_training:
     cmd: python stages/prediction_drift_detector_training.py --config=params.yaml
     deps:
@@ -211,8 +212,8 @@ stages:
       md5: 7479dbc78f55161d7a45e297704290ce
       size: 156170
     - path: stages/covariate_drift_detector_training.py
-      md5: 037ee4a35c6253dbfb69247e800e6dd4
-      size: 1435
+      md5: 974b4480fbc7f50dc2056844c6097bbd
+      size: 1636
     params:
       params.yaml:
         base:
@@ -222,9 +223,10 @@ stages:
         detector:
           dir: models
           data_drift:
-            fname: covariate_shift_detector.joblib
+            fname: covariate_shift_detector
+            n_permutations: 20
     outs:
-    - path: models/covariate_shift_detector.joblib
+    - path: models/covariate_shift_detector
       md5: e2a9a231006bd0b949c24f4bed722936.dir
       size: 140130
       nfiles: 2

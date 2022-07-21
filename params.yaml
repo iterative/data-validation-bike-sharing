@@ -15,7 +15,8 @@ train:
 detector:
   dir: models
   data_drift:
-    fname: covariate_shift_detector.joblib
+    fname: covariate_shift_detector
+    n_permutations: 20
 
 evaluation:
   metrics_dir: metrics
